@@ -1,12 +1,16 @@
 import React from "react";
 
-const TodoItem = ({ todo }) => {
+const TodoItem = (props) => {
     const style = {
         background: "rgba(240, 240, 240)",
         color: "black",
     };
 
-    return <li style={style}>{todo.title}</li>;
+    function handleClick() {
+        props.deleteTodo(props.todo.id)
+    }
+
+    return <li style={style} onClick={handleClick}>{props.todo.title}</li>;
 };
 
 export default TodoItem;
