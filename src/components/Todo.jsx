@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import TodoItem from "./TodoItem";
 
 const Todo = () => {
     const [todos, setTodos] = useState([
@@ -7,11 +8,13 @@ const Todo = () => {
         { id: 3, title: "Viec 3" },
     ]);
 
+    
+
     return (
         <div className="todo-list">
             <ul>
                 {todos.map((todo) => {
-                    return <li>{todo.title}</li>;
+                    return <TodoItem id={todo.id} title={todo.title} todo={todo}/>
                 })}
             </ul>
         </div>
