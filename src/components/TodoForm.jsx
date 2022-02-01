@@ -9,11 +9,13 @@ const TodoForm = (props) => {
 
     function handleSubmit(event) {
         event.preventDefault();
-        props.addTodo({
-            id: uuid(),
-            title: title,
-        });
-        setTitle("")
+        if (title !== "") {
+            props.addTodo({
+                id: uuid(),
+                title: title,
+            });
+        }
+        setTitle("");
     }
 
     return (
