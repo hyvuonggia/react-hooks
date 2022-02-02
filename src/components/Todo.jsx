@@ -1,34 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import TodoForm from "./TodoForm";
 import TodoItem from "./TodoItem";
-import { v4 as uuid } from "uuid";
+import { TodoContext } from "../contexts/TodoContext";
 const Todo = () => {
-    const [todos, setTodos] = useState([
-        { id: uuid(), title: "Viec 1" },
-        { id: uuid(), title: "Viec 2" },
-        { id: uuid(), title: "Viec 3" },
-    ]);
-
-    function addTodo(todo) {
-        setTodos([...todos, todo]);
-    }
-
-    function deleteTodo(id) {
-        setTodos(todos.filter((todo) => todo.id !== id));
-    }
+    //load context
+    const { todos } = useContext(TodoContext);
 
     return (
         <div className="todo-list">
-            <TodoForm addTodo={addTodo} />
+            <TodoForm />
             <ul>
                 {todos.map((todo) => {
-                    return (
-                        <TodoItem
-                            key={todo.id}
-                            todo={todo}
-                            deleteTodo={deleteTodo}
-                        />
-                    );
+                    return <TodoItem key={todo.id} todo={todo} />;
                 })}
             </ul>
         </div>

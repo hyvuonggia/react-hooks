@@ -1,7 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { v4 as uuid } from "uuid";
-const TodoForm = (props) => {
+import { ThemeContext } from "../contexts/ThemeContext";
+import { TodoContext } from "../contexts/TodoContext";
+
+const TodoForm = () => {
     const [title, setTitle] = useState("");
+
+    //load theme context
+    const { theme } = useContext(ThemeContext);
+    const { isLightTheme, light, dark } = theme;
+    const style = isLightTheme ? light : dark;
+
+    //load todo context
+    const {addTodo} = useContext(TodoContext)
 
     function handleChange(event) {
         setTitle(event.target.value);
@@ -10,7 +21,7 @@ const TodoForm = (props) => {
     function handleSubmit(event) {
         event.preventDefault();
         if (title !== "") {
-            props.addTodo({
+            addTodo({
                 id: uuid(),
                 title: title,
             });
@@ -19,7 +30,7 @@ const TodoForm = (props) => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form style={style} onSubmit={handleSubmit}>
             <input
                 type="text"
                 name="title"

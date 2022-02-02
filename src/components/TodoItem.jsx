@@ -1,16 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ThemeContext } from "../contexts/ThemeContext";
+import { TodoContext } from "../contexts/TodoContext";
+const TodoItem = ({ todo }) => {
+    //load theme context
+    const { theme } = useContext(ThemeContext);
+    const { isLightTheme, light, dark } = theme;
+    const style = isLightTheme ? light : dark;
 
-const TodoItem = (props) => {
-    const style = {
-        background: "rgba(240, 240, 240)",
-        color: "black",
-    };
+    //load todo context
+    const { deleteTodo } = useContext(TodoContext);
 
     function handleClick() {
-        props.deleteTodo(props.todo.id)
+        deleteTodo(todo.id);
     }
 
-    return <li style={style} onClick={handleClick}>{props.todo.title}</li>;
+    return (
+        <li style={style} onClick={handleClick}>
+            {todo.title}
+        </li>
+    );
 };
 
 export default TodoItem;
